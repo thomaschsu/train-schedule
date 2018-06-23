@@ -7,7 +7,7 @@
 .body-container {
     display: table;
     width: 100%;
-    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) );
+    background: #E0E0E0;
     background-position: center top;
     height: 350px;
 }
