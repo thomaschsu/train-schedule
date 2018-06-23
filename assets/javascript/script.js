@@ -17,7 +17,7 @@ $("#add-train-btn").on("click", function(event) {
 
   var trainName = $("#train-input").val().trim();
   var trainDestination = $("#destination-input").val().trim();
-  var trainStart = moment($("#first-train").val().trim(), "hh:mm").format("X");
+  var trainStart = moment($("#first-train").val().trim(), "hh:mm A").format("X");
   var freqrate = $("#frequency-input").val().trim();
   // Adds data to firebase
   var newTrain = {
@@ -26,8 +26,8 @@ $("#add-train-btn").on("click", function(event) {
       start: trainStart,
       rate: freqrate
   };
-
   database.ref().push(newTrain);
+
   // Clears the input
   $("#train-input").val("");
   $("#destination-input").val("");
@@ -44,7 +44,7 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
   var freqrate = childSnapshot.val().rate;
   var trainstartFormat = moment.unix(trainStart).format("hh:mm A");
   console.log(moment());
-  var minsAway = moment().diff(moment(trainStart, "X"), "minutes");
+  var minsAway = moment(trainStart, "X").diff(moment(), "minutes");
   // Adds information to table
   $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination + "</td><td>" + freqrate + "</td><td>" +
       trainstartFormat + "</td><td>" + minsAway + "</td><td>");
