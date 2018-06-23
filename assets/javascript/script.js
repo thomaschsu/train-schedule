@@ -43,7 +43,7 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
   var trainStart = childSnapshot.val().start;
   var freqrate = childSnapshot.val().rate;
   var trainstartFormat = moment.unix(trainStart).format("hh:mm A");
-  var minsAway = moment().diff(moment(trainStart, "X"), "minutes");
+  var minsAway = moment(trainStart, "X").diff(moment(), "minutes");
   // Adds information to table
   $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination + "</td><td>" + freqrate + "</td><td>" +
       trainstartFormat + "</td><td>" + minsAway + "</td><td>");
