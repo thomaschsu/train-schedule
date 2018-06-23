@@ -16,13 +16,13 @@ $("#add-train-btn").on("click", function(event) {
 
   var trainName = $("#train-input").val().trim();
   var trainDestination = $("#destination-input").val().trim();
-  var empStart = moment($("#first-train").val().trim(), "hh:mm a").format("X");
+  var trainStart = moment($("#first-train").val().trim(), "hh:mm a").format("X");
   var freqrate = $("#frequency-input").val().trim();
 
   var newTrain = {
       name: trainName,
       destination: trainDestination,
-      start: empStart,
+      start: trainStart,
       rate: freqrate
   };
 
@@ -38,13 +38,13 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
 
   var trainName = childSnapshot.val().name;
   var trainDestination = childSnapshot.val().destination;
-  var empStart = childSnapshot.val().start;
+  var trainStart = childSnapshot.val().start;
   var freqrate = childSnapshot.val().rate;
 
-  var empStartPretty = moment.unix(empStart).format("hh:mm a");
+  var trainstartFormat = moment.unix(trainStart).format("hh:mm a");
 
-  var empMonths = moment().diff(moment(empStart, "X"), "months");
+  var minsAway = moment().diff(moment(trainStart, "X"), "minutes");
 
   $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination + "</td><td>" + freqrate + "</td><td>" +
-      empStartPretty + "</td><td>" + empMonths + "</td><td>");
+      trainstartFormat + "</td><td>" + minsAway + "</td><td>");
 });
