@@ -42,13 +42,19 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
   var trainDestination = childSnapshot.val().destination;
   var trainStart = childSnapshot.val().start;
   var freqrate = childSnapshot.val().rate;
-  var trainstartFormat = moment.unix(trainStart).format("hh:mm A");
-  var minsAway = moment(trainStart, "X").diff(moment(), "minutes");
-// Change mins away to a positive if it is a negative.
-  if (minsAway < 0 ) {
-    minsAway = minsAway * -1;
-  }
+  var trainStartFormat = moment(trainStart, "HH:mm").subtract(1, "years");
+  var trainStartFormatUnix = moment.unix(trainStart).format("hh:mm A");
+
+  // Difference between the times
+  var diffTime = moment().diff(moment(trainStartFormat), "minutes");
+
+  // Time apart (remainder)
+  var tRemainder = diffTime % freqrate;
+
+  // Minute Until Train
+  var minsAway = freqrate - tRemainder;
+
   // Adds information to table
   $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination + "</td><td>" + freqrate + "</td><td>" +
-      trainstartFormat + "</td><td>" + minsAway + "</td><td>");
+      trainStartFormatUnix + "</td><td>" + minsAway + "</td><td>");
 });
