@@ -43,7 +43,6 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
   var trainStart = childSnapshot.val().start;
   var freqrate = childSnapshot.val().rate;
   var trainStartFormat = moment(trainStart, "HH:mm").subtract(1, "years");
-  var trainStartFormatUnix = moment.unix(trainStart).format("hh:mm A");
 
   // Difference between the times
   var diffTime = moment().diff(moment(trainStartFormat), "minutes");
@@ -54,7 +53,10 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
   // Minute Until Train
   var minsAway = freqrate - tRemainder;
 
+  // Next Train
+  var nextTrain = moment().add(minsAway, "minutes").format("hh:mm A");
+
   // Adds information to table
   $("#train-table > tbody").append("<tr><td>" + trainName + "</td><td>" + trainDestination + "</td><td>" + freqrate + "</td><td>" +
-      trainStartFormatUnix + "</td><td>" + minsAway + "</td><td>");
+      nextTrain + "</td><td>" + minsAway + "</td><td>");
 });
