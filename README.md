@@ -23,4 +23,10 @@ Check out this made-up train schedule that calculates the time till the next tra
 ### Live Link
 https://thomaschsu.github.io/train-schedule/
 
-ANYWAY, add your train name, destination, first train time, and frequency and bam you got it inputted into Firebase. "That's crazy!" you say? You know what's even crazier... The API key is clearly visible in the source code of the js file.
+- - - 
+
+### Instructions
+1. Add your train name, destination, first train time, and frequency
+2. Values are inputted into Firebase.
+3. Read when the next train will arrive in the table.
+4. Enjoy!
