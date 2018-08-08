@@ -15,7 +15,8 @@ Check out this made-up train schedule that calculates the time till the next tra
 2. CSS / Bootstrap
 3. JavaScript / JQuery
 4. Firebase
-5. Photoshop
+5. Moment JS
+6. Photoshop
 
 - - - 
 
